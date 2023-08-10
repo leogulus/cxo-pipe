@@ -23,8 +23,8 @@ import matplotlib as mpl
 from sherpa.astro import ui
 
 mpl.rcParams["text.usetex"] = True
-mpl.rcParams["text.latex.preamble"] = [r"\usepackage{amsmath}"]
-mpl.rcParams["text.latex.preamble"] = [r"\boldmath"]
+mpl.rcParams["text.latex.preamble"] = r"\usepackage{amsmath}"
+mpl.rcParams["text.latex.preamble"] = r"\boldmath"
 mpl.rcParams["xtick.direction"] = "in"
 mpl.rcParams["ytick.direction"] = "in"
 
@@ -163,7 +163,7 @@ def init_integ_maps(z, R500):
         delta_Rproj * np.pi / 180.0 / 3600.0
     ) * d_a  # kpc (take 2 arcsec step)
     rproj_max = rproj_out  # kpc
-    rproj_Nstep = np.int(rproj_max / rproj_step)  # Number of bins along L.o.S
+    rproj_Nstep = int(rproj_max / rproj_step)  # Number of bins along L.o.S
     remainder_4_div = rproj_Nstep % 4
     if remainder_4_div != 0:
         rproj_Nstep += 4 - remainder_4_div
@@ -1347,19 +1347,19 @@ def best_icm_models(res_dir, z, R500, N_ann, Ysz):
                     cl_dir + "/y_profile_MCMC.fits",
                     np.ones(10),
                     header=cluster_header,
-                    clobber=True,
+                    overwrite=True,
                 )
                 fits.append(
                     cl_dir + "/y_profile_MCMC.fits",
                     np.ones(10),
                     header=cluster_header,
-                    clobber=True,
+                    overwrite=True,
                 )
                 fits.append(
                     cl_dir + "/y_profile_MCMC.fits",
                     np.ones(10),
                     header=cluster_header,
-                    clobber=True,
+                    overwrite=True,
                 )
 
 
@@ -1704,7 +1704,7 @@ def cooling_lum(
                             gs.update(hspace=0.0)
                             ax0.set_yscale("log")
                             plt.rc("text", usetex=True)
-                            plt.rcParams["text.latex.preamble"] = [r"\boldmath"]
+                            plt.rcParams["text.latex.preamble"] = r"\boldmath"
                             ax0.set_xlim(0.7, 7)
                             ax0.set_ylabel(
                                 r"$\mathrm{Counts~s^{-1}~keV^{-1}}$", fontsize=12

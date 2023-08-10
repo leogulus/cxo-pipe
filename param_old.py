@@ -1,9 +1,9 @@
 # -------------------------------------------------------------
 # =================== Begin User Instructions =================
 # -------------------------------------------------------------
-source_name = "CHIPS1911+4455"       # The cluster name
-obsids = "21544"                        # The obsids to be considered "id1,id2,id3,..."
-z = 0.485                               # The cluster redshift
+source_name = "MACSJ0329.6-0211"       # The cluster name
+obsids = "3257"                        # The obsids to be considered "id1,id2,id3,..."
+z = 0.45                               # The cluster redshift
 
 R500 = 950.0         # A first guess of the cluster R500 radius
 use_peak = True      # Will use the large-scale centroid as a deprojection center if False

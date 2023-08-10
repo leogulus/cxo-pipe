@@ -1,3 +1,5 @@
+Previous version: https://github.com/laurelvwhite/xray-analysis
+
 CXO-ICM
 ===
 
@@ -13,7 +15,7 @@ Features
 * Reprocesses the level 1 event files and remove flares from lightcurves.
 * Identifies point sources with wavelet filters and mask them.
 * Extracts the X-ray surface brightness profile in the 0.7-2.0 keV band.
-* Estimates the ICM temperature profile or the mean ICM temperature through the analysis of the X-ray spectra.
+* Estimates the ICM temperature profile or the mean ICM temperature through the analysis of the X-ray spectra. 
 * Estimates the ICM density profile from a Bayesian forward fit of the emission measure profile.
 * Combines the ICM density and temperature profiles to estimate other ICM properties (entropy, pressure, cooling time, HSE mass)
 * Produces adaptively-smoothed image of the cluster

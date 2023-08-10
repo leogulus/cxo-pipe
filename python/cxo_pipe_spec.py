@@ -940,11 +940,11 @@ def fit_T_prof(res_dir, R500, z):
                         T_prof_err,
                         1,
                     ),
-                    maxfev=np.int(1e6),
+                    maxfev=int(1e6),
                 )
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore")
-                    fitted_param = np.array(popt)[0]
+                    fitted_param = popt[0]
                 T_model = V06_model(
                     fitted_param, rad_plot / R500, T_prof, T_prof_err, 0
                 )
@@ -1150,5 +1150,5 @@ def XSB_to_EM_coef(res_dir, obsids, z):
         file_save_res = cl_dir + "Tab_conv_results.fits"
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            fits.writeto(file_save_res, Te_tab, clobber=True)
-            fits.append(file_save_res, norm_tab, clobber=True)
+            fits.writeto(file_save_res, Te_tab, overwrite=True)
+            fits.append(file_save_res, norm_tab, overwrite=True)

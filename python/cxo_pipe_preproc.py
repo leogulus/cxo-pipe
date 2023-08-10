@@ -840,12 +840,12 @@ def find_peak_cent(res_dir, z, R500, use_peak, fixed_coord):
             warnings.simplefilter("ignore")
             w = wcs.WCS(cl_header)
             get_coord = w.wcs_pix2world(
-                np.float(Xpeak_img + (Xpeak_img_fine - N)),
-                np.float(Ypeak_img + (Ypeak_img_fine - N)),
+                float(Xpeak_img + (Xpeak_img_fine - N)),
+                float(Ypeak_img + (Ypeak_img_fine - N)),
                 1,
             )
-            Xpeak_coord = np.float(get_coord[0])
-            Ypeak_coord = np.float(get_coord[1])
+            Xpeak_coord = float(get_coord[0])
+            Ypeak_coord = float(get_coord[1])
 
         d_a = cosmo.angular_diameter_distance(z).to("kpc").value
         R500_pix = (
@@ -862,18 +862,18 @@ def find_peak_cent(res_dir, z, R500, use_peak, fixed_coord):
         sp.call(["bash", "shell/find_centroid.sh", map_file, cent_reg_name, cent_file])
         Xcent, Ycent = get_cent_from_file(cent_file)
 
-        Xcent_img = (np.float(Xcent) - cl_header["CRVAL1P"]) / cl_header[
+        Xcent_img = (float(Xcent) - cl_header["CRVAL1P"]) / cl_header[
             "CDELT1P"
         ] + cl_header["CRPIX1P"]
-        Ycent_img = (np.float(Ycent) - cl_header["CRVAL2P"]) / cl_header[
+        Ycent_img = (float(Ycent) - cl_header["CRVAL2P"]) / cl_header[
             "CDELT2P"
         ] + cl_header["CRPIX2P"]
 
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            get_coord = w.wcs_pix2world(np.float(Xcent_img), np.float(Ycent_img), 1)
-            Xcent_coord = np.float(get_coord[0])
-            Ycent_coord = np.float(get_coord[1])
+            get_coord = w.wcs_pix2world(float(Xcent_img), float(Ycent_img), 1)
+            Xcent_coord = float(get_coord[0])
+            Ycent_coord = float(get_coord[1])
 
         if fixed_coord is not None:
             Xpeak_coord = fixed_coord[0]
@@ -881,8 +881,8 @@ def find_peak_cent(res_dir, z, R500, use_peak, fixed_coord):
             with warnings.catch_warnings():
                 warnings.simplefilter("ignore")
                 get_pix = w.wcs_world2pix(Xpeak_coord, Ypeak_coord, 1)
-                Xpeak_img = np.float(get_pix[0])
-                Ypeak_img = np.float(get_pix[1])
+                Xpeak_img = float(get_pix[0])
+                Ypeak_img = float(get_pix[1])
                 Xpeak = (Xpeak_img - cl_header["CRPIX1P"]) * cl_header[
                     "CDELT1P"
                 ] + cl_header["CRVAL1P"]
@@ -943,7 +943,7 @@ def bkg_region(res_dir, z, R500, Xdepro, Ydepro, multiobs, obsids):
             file_area = mer_dir + "bkg_area_" + obsid + ".txt"
             with open(file_area) as f:
                 content = f.readlines()
-            bkg_area = np.float(content[0])
+            bkg_area = float(content[0])
             bkg_area_tab.append(bkg_area)
     else:
         efile = mer_dir + "efile_repro_raw_clean_nopts.fits"
@@ -1349,10 +1349,10 @@ def X_ray_SB_profile(res_dir, obsids, z):
         d_a = cosmo.angular_diameter_distance(z).to("kpc").value
         Rmid_kpc = d_a * (Rmid * u.arcmin).to("radian").value
 
-        fits.writeto(mer_dir + "Sx_profile_MCMC.fits", Rmid, clobber=True)
-        fits.append(mer_dir + "Sx_profile_MCMC.fits", Rmid_kpc, clobber=True)
-        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_N, clobber=True)
-        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_err_N, clobber=True)
-        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_bkg_N, clobber=True)
-        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_bkg_err_N, clobber=True)
-        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_float_to_N, clobber=True)
+        fits.writeto(mer_dir + "Sx_profile_MCMC.fits", Rmid, overwrite=True)
+        fits.append(mer_dir + "Sx_profile_MCMC.fits", Rmid_kpc, overwrite=True)
+        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_N, overwrite=True)
+        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_err_N, overwrite=True)
+        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_bkg_N, overwrite=True)
+        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_prof_bkg_err_N, overwrite=True)
+        fits.append(mer_dir + "Sx_profile_MCMC.fits", XSB_float_to_N, overwrite=True)

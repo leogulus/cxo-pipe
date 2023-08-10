@@ -26,8 +26,8 @@ import scipy.ndimage
 cosmo = FlatLambdaCDM(70.0, 0.3, Tcmb0=2.7255)
 
 mpl.rcParams["text.usetex"] = True
-mpl.rcParams["text.latex.preamble"] = [r"\usepackage{amsmath}"]
-mpl.rcParams["text.latex.preamble"] = [r"\boldmath"]
+mpl.rcParams["text.latex.preamble"] = r"\usepackage{amsmath}"
+mpl.rcParams["text.latex.preamble"] = r"\boldmath"
 mpl.rcParams["xtick.direction"] = "in"
 mpl.rcParams["ytick.direction"] = "in"
 
@@ -363,7 +363,7 @@ def plot_spectra(res_dir, obsids):
                         gs.update(hspace=0.0)
                         ax0.set_yscale("log")
                         plt.rc("text", usetex=True)
-                        plt.rcParams["text.latex.preamble"] = [r"\boldmath"]
+                        plt.rcParams["text.latex.preamble"] = r"\boldmath"
                         ax0.set_xlim(0.7, 9)
                         ax0.set_ylabel(
                             r"$\mathrm{Counts~s^{-1}~keV^{-1}}$", fontsize=12
@@ -1408,7 +1408,7 @@ def cluster_id_card(res_dir, source_name, z):
     icm_prop = np.load(icm_dir + "ICM_best_fits.npz")
 
     Aphot_file = mer_dir + "Aphot_morpho.npy"
-    Aphot = np.float(np.load(Aphot_file))
+    Aphot = float(np.load(Aphot_file))
 
     cl_id = open(fig_dir + "cluster_ID_card.txt", "w")
 

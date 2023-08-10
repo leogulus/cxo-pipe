@@ -3,6 +3,8 @@ import time
 from termcolor import colored
 import subprocess as sp
 
+import sys
+sys.path.insert(0, '')
 
 import python.cxo_pipe_preproc as prepro
 import python.cxo_pipe_spec as spec
